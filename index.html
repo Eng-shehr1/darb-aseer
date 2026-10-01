@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content="Plan a day in Abha around your group, explore local places and play the story challenge with Darb Aseer." />
+<meta name="theme-color" content="#2f4a3c" />
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+<title>Darb Aseer — One trip. Something for everyone.</title>
+<link rel="stylesheet" href="css/style.css" />
+<link rel="stylesheet" href="css/planner.css" />
+</head>
+<body>
+
+<div id="app">
+  <header class="topbar">
+    <div class="topbar-inner container">
+      <div class="brand">
+        <svg class="icon"><use href="#icon-mountain"></use></svg>
+        <span data-i18n="brandName">Darb Aseer</span>
+      </div>
+      <div class="topbar-controls">
+        <button id="langToggleBtn" class="btn-ghost topbar-control-btn" type="button">
+          <svg class="icon icon-sm"><use href="#icon-globe"></use></svg>
+          <span>العربية</span>
+        </button>
+        <button id="themeToggleBtn" class="btn-ghost topbar-control-btn" type="button">
+          <svg class="icon icon-sm"><use href="#icon-moon"></use></svg>
+          <span data-i18n="darkMode">Dark mode</span>
+        </button>
+        <button id="newTripBtn" class="btn-ghost hidden" type="button">
+          <svg class="icon icon-sm"><use href="#icon-refresh"></use></svg>
+          <span data-i18n="newTrip">New trip</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="views">
+
+    <!-- ===================== صفحة البداية ===================== -->
+    <section id="view-landing" class="view">
+      <div class="container">
+        <div class="hero">
+          <div class="hero-content">
+            <svg class="icon icon-lg"><use href="#icon-mountain"></use></svg>
+            <h1 data-i18n="brandName">Darb Aseer</h1>
+            <p class="tagline" data-i18n="tagline">One trip. Something for everyone.</p>
+          </div>
+          <div class="hero-actions">
+            <button id="startPlanBtn" class="btn btn-primary" type="button">
+              <svg class="icon icon-sm"><use href="#icon-compass"></use></svg>
+              <span data-i18n="planOurDay">Plan our day</span>
+            </button>
+            <button id="soloPlanBtn" class="btn btn-secondary" type="button">
+              <svg class="icon icon-sm"><use href="#icon-backpack"></use></svg>
+              <span data-i18n="planSolo">Plan just for me</span>
+            </button>
+            <button id="tryDemoBtn" class="btn btn-secondary" type="button">
+              <svg class="icon icon-sm"><use href="#icon-sparkles"></use></svg>
+              <span data-i18n="trySample">Try a sample group</span>
+            </button>
+          </div>
+          <svg class="mountains-deco" viewBox="0 0 800 120" preserveAspectRatio="none" aria-hidden="true">
+            <polygon points="0,120 0,70 90,20 180,75 260,35 360,90 460,45 560,85 650,30 740,70 800,50 800,120" fill="#1c2e24" opacity="0.65" />
+            <polygon points="0,120 0,95 120,55 220,95 320,60 420,100 520,65 620,100 720,60 800,90 800,120" fill="#2f4a3c" opacity="0.9" />
+          </svg>
+        </div>
+        <p class="intro-note" data-i18n="introNote">
+          Answer a few questions for each person, discover what you share, and build a day with something for everyone.
+        </p>
+      </div>
+    </section>
+
+    <!-- ===================== إنشاء رحلة ===================== -->
+    <section id="view-setup" class="view hidden">
+      <div class="container">
+        <button class="btn-ghost back-to-landing" type="button">
+          <svg class="icon icon-sm"><use href="#icon-arrow-forward"></use></svg>
+          <span data-i18n="back">Back</span>
+        </button>
+        <h2 class="page-title" data-i18n="createTripTitle">Create your trip</h2>
+        <p class="page-subtitle" data-i18n="createTripSubtitle">Add your group, then let each person answer on this device.</p>
+
+        <form id="setupForm" class="form-card" novalidate>
+          <div class="field">
+            <label for="tripName" data-i18n="tripNameLabel">Trip name</label>
+            <input type="text" id="tripName" data-i18n-placeholder="tripNamePlaceholder" placeholder="For example: Family day in Aseer" required />
+          </div>
+
+          <div class="field">
+            <label data-i18n="groupSizeLabel">Group size</label>
+            <div class="count-selector" id="countSelector">
+              <!-- تُبنى أزرار 2 إلى 6 عبر JS -->
+            </div>
+          </div>
+
+          <div class="field">
+            <label data-i18n="participantNamesLabel">Participant names</label>
+            <div class="names-grid" id="namesGrid">
+              <!-- تُبنى حقول الأسماء عبر JS -->
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="budget" data-i18n="budgetLabel">Daily budget for the whole group</label>
+            <div class="input-suffix-wrap">
+              <input type="number" id="budget" min="0" step="10" data-i18n-placeholder="budgetPlaceholder" placeholder="For example: 600" required />
+              <span class="input-suffix" data-i18n="sarPerDay">SAR / day</span>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="startPoint" data-i18n="startPointLabel">Starting point</label>
+            <input type="text" id="startPoint" data-i18n-placeholder="startPointPlaceholder" placeholder="For example: Abha or your hotel" required />
+          </div>
+
+          <div class="field">
+            <label data-i18n="tripLengthLabel">Trip length</label>
+            <span class="duration-badge">
+              <svg class="icon icon-sm"><use href="#icon-calendar"></use></svg>
+              <span data-i18n="oneDayNotice">One day in this version</span>
+            </span>
+          </div>
+
+          <p class="error-text" id="setupError" data-i18n="setupErrorText">Please complete all fields and enter a budget greater than zero.</p>
+
+          <div class="actions-row">
+            <button type="submit" class="btn btn-primary">
+              <span data-i18n="startQuestionnaire">Start questionnaire</span>
+              <svg class="icon icon-sm"><use href="#icon-arrow-back"></use></svg>
+            </button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- ===================== تسليم الجهاز ===================== -->
+    <section id="view-handoff" class="view hidden">
+      <div class="container">
+        <div class="handoff-card">
+          <svg class="icon icon-lg"><use href="#icon-users"></use></svg>
+          <p class="handoff-order" id="handoffOrder">Person 1 of 3</p>
+          <h2 id="handoffName">Your turn, Sara</h2>
+          <p id="handoffText">Pass the device to this person so they can choose their own answers.</p>
+          <button id="handoffStartBtn" class="btn btn-primary" type="button">
+            <span data-i18n="startQuestionnaire">Start questionnaire</span>
+            <svg class="icon icon-sm"><use href="#icon-arrow-back"></use></svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== الاستبيان ===================== -->
+    <section id="view-survey" class="view hidden">
+      <div class="container">
+        <div class="progress-wrap">
+          <div class="progress-meta">
+            <span><span data-i18n="answeringNow">Answering now:</span> <span class="participant-name" id="progressParticipant">—</span></span>
+            <span id="progressStepText">Question 1 of 6</span>
+          </div>
+          <div class="progress-bar-track">
+            <div class="progress-bar-fill" id="progressBarFill" style="width:0%"></div>
+          </div>
+        </div>
+
+        <div class="survey-card" id="surveyCard">
+          <!-- يُبنى محتوى السؤال أو خطوة الأمنيات/الاحتياجات عبر JS -->
+        </div>
+
+        <div class="actions-row" id="surveyActions" style="max-width:680px;margin-inline:auto;">
+          <button id="surveyBackBtn" class="btn btn-secondary" type="button">
+            <svg class="icon icon-sm"><use href="#icon-arrow-forward"></use></svg>
+            <span data-i18n="previous">Previous</span>
+          </button>
+          <button id="surveyNextBtn" class="btn btn-primary" type="button" disabled>
+            <span data-i18n="next">Next</span>
+            <svg class="icon icon-sm"><use href="#icon-arrow-back"></use></svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== الملخص ===================== -->
+    <section id="view-summary" class="view hidden">
+      <div class="container" id="summaryContainer">
+        <!-- يُبنى كامل محتوى صفحة الملخص عبر JS -->
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- ===================== ملصق الأيقونات ===================== -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+<defs>
+
+<symbol id="icon-mountain" viewBox="0 0 24 24">
+  <path d="M3 18L9 8l4 6 2-3 6 7H3Z" />
+</symbol>
+
+<symbol id="icon-landmark" viewBox="0 0 24 24">
+  <path d="M3 10 12 4l9 6" />
+  <path d="M5 10v9M9 10v9M15 10v9M19 10v9" />
+  <path d="M3 21h18" />
+</symbol>
+
+<symbol id="icon-compass" viewBox="0 0 24 24">
+  <circle cx="12" cy="12" r="9" />
+  <path d="M15 9l-2 6-6 2 2-6 6-2Z" />
+</symbol>
+
+<symbol id="icon-basket" viewBox="0 0 24 24">
+  <path d="M4 9h16l-1.6 9.8a2 2 0 0 1-2 1.7H7.6a2 2 0 0 1-2-1.7L4 9Z" />
+  <path d="M8 9V7a4 4 0 0 1 8 0v2" />
+</symbol>
+
+<symbol id="icon-palette" viewBox="0 0 24 24">
+  <path d="M12 3a9 9 0 1 0 0 18c1.1 0 1.6-.9 1.2-1.8-.3-.7.2-1.5 1-1.5H16a4 4 0 0 0 4-4c0-5.8-3.6-10.7-8-10.7Z" />
+  <circle cx="8" cy="10" r="1" fill="currentColor" stroke="none" />
+  <circle cx="12" cy="7.3" r="1" fill="currentColor" stroke="none" />
+  <circle cx="16" cy="10" r="1" fill="currentColor" stroke="none" />
+  <circle cx="9" cy="14.5" r="1" fill="currentColor" stroke="none" />
+</symbol>
+
+<symbol id="icon-question" viewBox="0 0 24 24">
+  <circle cx="12" cy="12" r="9" />
+  <path d="M9.5 9.3a2.5 2.5 0 0 1 4.8-1c.4.9 0 1.7-.8 2.3-.8.7-1.3 1.2-1.3 2.3" />
+  <circle cx="12" cy="17" r="0.7" fill="currentColor" stroke="none" />
+</symbol>
+
+<symbol id="icon-leaf" viewBox="0 0 24 24">
+  <path d="M5 21c8 0 13-5 13-13V4h-4C6 4 5 13 5 21Z" />
+  <path d="M5 21c0-6 3-10 8-12" />
+</symbol>
+
+<symbol id="icon-users" viewBox="0 0 24 24">
+  <circle cx="9" cy="8" r="3" />
+  <path d="M3.5 20c0-3.6 2.5-6.2 5.5-6.2s5.5 2.6 5.5 6.2" />
+  <circle cx="17" cy="9" r="2.3" />
+  <path d="M15.5 13.8c2.6.5 4.5 2.8 4.5 6.2" />
+</symbol>
+
+<symbol id="icon-sparkles" viewBox="0 0 24 24">
+  <path d="M12 3l1.5 4.5L18 9l-4.5 1.5L12 15l-1.5-4.5L6 9l4.5-1.5L12 3Z" />
+  <path d="M19 14.5l.6 1.9 1.9.6-1.9.6-.6 1.9-.6-1.9-1.9-.6 1.9-.6.6-1.9Z" />
+</symbol>
+
+<symbol id="icon-backpack" viewBox="0 0 24 24">
+  <path d="M8 8V6a4 4 0 0 1 8 0v2" />
+  <rect x="5" y="8" width="14" height="13" rx="3" />
+  <path d="M9 12h6" />
+  <path d="M9 21v-5h6v5" />
+</symbol>
+
+<symbol id="icon-chair" viewBox="0 0 24 24">
+  <path d="M6 10V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v5" />
+  <path d="M4 10h16v4H4Z" />
+  <path d="M6 14v6M18 14v6" />
+</symbol>
+
+<symbol id="icon-footprints" viewBox="0 0 24 24">
+  <ellipse cx="8" cy="9" rx="2.2" ry="3.1" transform="rotate(-12 8 9)" />
+  <ellipse cx="16" cy="15.5" rx="2.2" ry="3.1" transform="rotate(-12 16 15.5)" />
+</symbol>
+
+<symbol id="icon-run" viewBox="0 0 24 24">
+  <circle cx="14" cy="4.5" r="1.8" />
+  <path d="M10 10l3-2.3 2.7 2.8-1.8 1.8 3 2.6-1 3.3" />
+  <path d="M13 8.3 9 11l1 3.6-2.6 3" />
+</symbol>
+
+<symbol id="icon-sunrise" viewBox="0 0 24 24">
+  <path d="M12 3v4" />
+  <path d="M4.5 10.5l1.8-1.8M19.5 10.5l-1.8-1.8" />
+  <path d="M2 15h20" />
+  <path d="M6 15a6 6 0 0 1 12 0" />
+</symbol>
+
+<symbol id="icon-clock" viewBox="0 0 24 24">
+  <circle cx="12" cy="12" r="9" />
+  <path d="M12 7v5l4 2" />
+</symbol>
+
+<symbol id="icon-moon" viewBox="0 0 24 24">
+  <path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5Z" />
+</symbol>
+
+<symbol id="icon-rocket" viewBox="0 0 24 24">
+  <path d="M12 2c3 2 5 6.2 5 10 0 2-1 4-2 5l-1-3-2 1-2-1-1 3c-1-1-2-3-2-5 0-3.8 2-8 5-10Z" />
+  <circle cx="12" cy="10" r="1.3" fill="currentColor" stroke="none" />
+  <path d="M9 16.5 7 20M15 16.5l2 3.5" />
+</symbol>
+
+<symbol id="icon-seedling" viewBox="0 0 24 24">
+  <path d="M12 21v-8" />
+  <path d="M12 13C7 13 4 10 4 6c4 0 7 2 8 5" />
+  <path d="M12 13c4 0 7-2 8-6-4 0-7 1.5-8 5" />
+</symbol>
+
+<symbol id="icon-home" viewBox="0 0 24 24">
+  <path d="M4 11l8-7 8 7" />
+  <path d="M6 10v10h12V10" />
+  <path d="M10 20v-5h4v5" />
+</symbol>
+
+<symbol id="icon-stairs" viewBox="0 0 24 24">
+  <path d="M4 20v-4h4v-4h4v-4h4v-4h4" />
+  <line x1="3" y1="3" x2="21" y2="21" />
+</symbol>
+
+<symbol id="icon-walk-slash" viewBox="0 0 24 24">
+  <circle cx="14" cy="4.5" r="1.6" />
+  <path d="M10.5 9.5 14 7.3l2.3 3-1.6 1.6 2.6 2.3-.8 3" />
+  <path d="M13 7.8 9.5 10l.8 3.2-2.3 2.6" />
+  <line x1="3" y1="3" x2="21" y2="21" />
+</symbol>
+
+<symbol id="icon-umbrella" viewBox="0 0 24 24">
+  <path d="M4 12a8 8 0 0 1 16 0Z" />
+  <path d="M12 12v7a2 2 0 0 1-4 0" />
+  <path d="M12 4v2" />
+</symbol>
+
+<symbol id="icon-wheelchair" viewBox="0 0 24 24">
+  <circle cx="15.5" cy="17.5" r="3" />
+  <circle cx="8.5" cy="6" r="1.6" />
+  <path d="M8.5 8v5h5.5l3 4.5" />
+  <path d="M8.5 12.5H5.5" />
+</symbol>
+
+<symbol id="icon-dots" viewBox="0 0 24 24">
+  <circle cx="6" cy="12" r="1.5" fill="currentColor" stroke="none" />
+  <circle cx="12" cy="12" r="1.5" fill="currentColor" stroke="none" />
+  <circle cx="18" cy="12" r="1.5" fill="currentColor" stroke="none" />
+</symbol>
+
+<symbol id="icon-edit" viewBox="0 0 24 24">
+  <path d="M4 20l4-1 11-11-3-3L5 16l-1 4Z" />
+  <path d="M13 6l3 3" />
+</symbol>
+
+<symbol id="icon-refresh" viewBox="0 0 24 24">
+  <path d="M20 11A8 8 0 1 0 18.4 16" />
+  <path d="M20 5.5V11h-5.5" />
+</symbol>
+
+<symbol id="icon-map-pin" viewBox="0 0 24 24">
+  <path d="M12 21s7-6.7 7-12.2A7 7 0 1 0 5 8.8C5 14.3 12 21 12 21Z" />
+  <circle cx="12" cy="9" r="2.3" />
+</symbol>
+
+<symbol id="icon-wallet" viewBox="0 0 24 24">
+  <rect x="3" y="6" width="18" height="13" rx="2" />
+  <path d="M3 10h18" />
+  <circle cx="17" cy="14.2" r="1.3" fill="currentColor" stroke="none" />
+</symbol>
+
+<symbol id="icon-calendar" viewBox="0 0 24 24">
+  <rect x="3" y="5" width="18" height="16" rx="2" />
+  <path d="M3 9.5h18" />
+  <path d="M8 3v4M16 3v4" />
+</symbol>
+
+<symbol id="icon-check" viewBox="0 0 24 24">
+  <path d="M5 13l4.5 4.5L19 8" />
+</symbol>
+
+<symbol id="icon-check-circle" viewBox="0 0 24 24">
+  <circle cx="12" cy="12" r="9" />
+  <path d="M8 12.3l2.6 2.6L16 9.3" />
+</symbol>
+
+<symbol id="icon-arrow-back" viewBox="0 0 24 24">
+  <path d="M15 6l-6 6 6 6" />
+</symbol>
+
+<symbol id="icon-arrow-forward" viewBox="0 0 24 24">
+  <path d="M9 6l6 6-6 6" />
+</symbol>
+
+<symbol id="icon-scales" viewBox="0 0 24 24">
+  <path d="M12 3v18M7 21h10" />
+  <path d="M4 8h6M14 8h6" />
+  <path d="M4 8l-2.5 5a2.8 2.8 0 0 0 5 0L4 8Z" />
+  <path d="M20 8l-2.5 5a2.8 2.8 0 0 0 5 0L20 8Z" />
+</symbol>
+
+<symbol id="icon-puzzle" viewBox="0 0 24 24">
+  <path d="M9 4h4v2.2a1.8 1.8 0 1 0 0 3.6V12h2.2a1.8 1.8 0 1 1 0 3.6H15v2.2a1.8 1.8 0 1 1-3.6 0V15H9v-2.2a1.8 1.8 0 1 0 0-3.6V4Z" />
+  <path d="M5 9H3v10a2 2 0 0 0 2 2h10v-2" />
+</symbol>
+
+<symbol id="icon-globe" viewBox="0 0 24 24">
+  <circle cx="12" cy="12" r="9" />
+  <path d="M3 12h18" />
+  <path d="M12 3c2.8 2.4 4.2 5.6 4.2 9s-1.4 6.6-4.2 9c-2.8-2.4-4.2-5.6-4.2-9S9.2 5.4 12 3Z" />
+</symbol>
+
+</defs>
+</svg>
+
+<script src="js/i18n.js"></script>
+<script src="js/data.js"></script>
+<script src="js/planner.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

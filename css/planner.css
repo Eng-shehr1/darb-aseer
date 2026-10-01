@@ -1,0 +1,50 @@
+/* إضافات المرحلة الثانية */
+.opt-card:not(.selected) .opt-check .icon{visibility:hidden}
+.darb-invite{background:#233f32;color:#fffdf8;border-radius:24px;padding:28px;margin:28px 0;display:flex;align-items:center;justify-content:space-between;gap:20px}.darb-invite h3{font-size:28px;margin:4px 0}.darb-invite p{margin:0;color:#e0e5d9}.darb-invite .btn{background:#eac59a;color:#243e31;white-space:nowrap}.eyebrow{font-size:13px;letter-spacing:.02em;color:#87552f} .darb-invite .eyebrow{color:#eac59a}
+#plannerPanel{scroll-margin-top:80px;margin-bottom:40px}.plan-title{display:flex;justify-content:space-between;align-items:center;gap:12px}.plan-title h2{font-size:28px;margin:4px 0 16px}.plan-notice{border-right:4px solid #b17b47;background:#eee4cf;padding:16px;border-radius:12px;font-size:14px}.plan-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:20px}.plan-metrics>div{background:#fffdf8;padding:16px;border:1px solid #e3d7bd;border-radius:16px}.plan-metrics strong{display:block;font-size:25px}.plan-metrics span,.small{font-size:13px;color:#5d6359}.over-budget strong{color:#a13b2b}.plan-controls{display:flex;align-items:center;justify-content:space-between;gap:14px;margin:22px 0}.plan-controls input{width:auto;padding:8px;border:1px solid #c9c9b6;border-radius:8px;font:inherit}.coverage{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:22px}.coverage-item{flex:1;min-width:170px;background:#e6ebe2;border-radius:12px;padding:12px}.coverage-item strong,.coverage-item span{display:block}.coverage-item span{font-size:13px}
+.plan-layout{display:grid;grid-template-columns:1.1fr 1fr;gap:18px;align-items:start}.stop-card,.map-card,.discovery-card{padding:20px;border:1px solid #e3d7bd;border-radius:20px;background:#fffdf8}.stop-head{display:flex;gap:12px;align-items:center}.stop-head h3{margin:2px 0;font-size:21px}.stop-num{display:grid;place-items:center;min-width:32px;height:32px;background:#2f4a3c;color:white;border-radius:50%}.place-symbol{margin-right:auto;color:#9c5a30;font-size:32px}.stop-card p{font-size:14px}.reason{background:#edf1e8;padding:10px;border-radius:10px;font-size:13px}.stop-actions{display:flex;flex-wrap:wrap;gap:8px;align-items:center}.stop-actions .btn{font-size:12px;padding:8px 10px}.source-link{font-size:13px;color:#2f5943;text-decoration:underline}.replace-label{display:block;margin-top:16px;font-size:13px}.replace-label select{display:block;width:100%;font:inherit;background:#fff;padding:10px;margin-top:5px;border:1px solid #c6caba;border-radius:9px}.transfer{text-align:center;font-size:12px;color:#666e60;margin:12px}.map-card h3,.discovery-card h3{margin:0 0 8px}.map-key{display:flex;justify-content:space-between;font-size:12px;color:#405847}#sketchMap svg{width:100%;height:auto}#sketchMap [data-pin]{cursor:pointer}#sketchMap [data-pin]:focus circle{stroke:#d57a31;stroke-width:5}#realMap iframe{width:100%;height:250px;border:0;border-radius:12px;margin:10px 0}.discovery-card{margin-top:16px;background:#efe5d2}.quiz-options{display:grid;gap:8px}.quiz-options .btn{white-space:normal}.quiz-finish{margin-top:20px;padding:16px;background:#2f4a3c;color:white;border-radius:12px}#quizFeedback .btn{display:block;margin-top:12px}.plan-sources{padding:20px;margin-top:20px;border:1px solid #dbd2be;border-radius:12px;font-size:14px}.plan-sources summary{cursor:pointer;font-weight:bold}
+@media(min-width:1100px){body:has(#plannerPanel:not([hidden])) #view-summary>.container{max-width:1140px}}
+@media(max-width:700px){.plan-layout{grid-template-columns:1fr}.map-side{order:-1}.darb-invite{flex-direction:column;align-items:stretch}.plan-controls{align-items:stretch;flex-direction:column}.plan-title{flex-wrap:wrap}.plan-metrics strong{font-size:20px}.plan-metrics>div{padding:10px}.coverage-item{min-width:130px}.stop-card{padding:16px}}
+@media print{.topbar,.darb-invite,.summary-grid,.insight-section,.summary-header,.summary-footer-actions,.footer-note,.intro-note,.plan-controls,.stop-actions,.replace-label,.discovery-card,.plan-title button,#realMap{display:none!important}#plannerPanel{display:block!important}.container{max-width:none!important}.plan-layout{display:block}.map-side{display:none}.stop-card{break-inside:avoid;margin-bottom:12px}body{background:white}}
+/* Readable, consistent controls across the complete journey. */
+.eyebrow,.small,.reason,.coverage-item span,.replace-label,.source-link,.stop-actions .btn,.plan-metrics span,.map-key{font-size:.875rem;line-height:1.8}
+.stop-card p,.opt-card-text span,.survey-q-hint{font-size:1rem;line-height:1.8}
+.btn,.btn-ghost,select,input{min-height:44px}.btn-ghost{font:inherit;border:1px solid var(--color-border);border-radius:12px;padding:10px 16px;background:var(--color-card);color:var(--color-primary)}
+button:focus-visible,a:focus-visible,select:focus-visible,input:focus-visible{outline:3px solid #a25c2f;outline-offset:4px}
+.opt-card.selected{box-shadow:0 0 0 1px var(--color-primary);background:#e8efe6}.opt-card.selected .opt-check{background:var(--color-primary);color:white}
+.coverage-title{margin:24px 0 12px}.coverage-item{border-inline-start:3px solid #996137}.coverage-item strong{font-size:1.05rem;margin-bottom:4px}
+.answer-correct:disabled{opacity:1;background:#dcebd9;color:#203d29;border-color:#315b3c}.answer-wrong:disabled{opacity:1;background:#f7e5df;color:#813923;border-color:#ae6044}
+.saved-score{border-inline-start:3px solid #365c40;padding-inline-start:12px;font-weight:600}
+#storageNotice{padding:12px 20px;background:#fff0cb;color:#644817;margin:0}
+.stop-card:target{outline:2px solid var(--color-accent)}.stop-head>div{min-width:0}.plan-title h2,.coverage-item strong,.wish-box{overflow-wrap:anywhere}
+@media(max-width:700px){.map-side{order:initial}.plan-metrics{gap:8px}.plan-metrics strong{font-size:1.1rem}.plan-metrics span{font-size:.8rem}.plan-controls .btn{width:100%}.stop-actions .btn{flex:1}.plan-title h2{font-size:1.5rem}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+/* English layout */
+html[lang="en"] body{font-family:Inter,"Segoe UI",Arial,sans-serif}
+html[dir="ltr"] .opt-card{text-align:left}
+html[dir="ltr"] .place-symbol{margin-right:0;margin-left:auto}
+html[dir="ltr"] .plan-notice{border-right:0;border-left:4px solid #b17b47}
+html[dir="ltr"] .btn .icon:has(use[href*="arrow"]),html[dir="ltr"] .btn-ghost .icon:has(use[href*="arrow"]){display:none}
+html[lang="en"] .chip-row{flex-wrap:wrap}
+html[lang="en"] .progress-meta{gap:12px;flex-wrap:wrap}
+html[lang="en"] .opt-card-text strong{line-height:1.4}
+
+html[lang="en"] .input-suffix-wrap input{padding-inline-end:100px}
+
+/* الوضع الليلي — لوحة التخطيط والتحدي */
+html[data-theme="dark"] .plan-notice{background:#2a2419;color:var(--color-text);border-right-color:#b17b47}
+html[dir="ltr"][data-theme="dark"] .plan-notice{border-left-color:#b17b47}
+html[data-theme="dark"] .plan-metrics>div{background:var(--color-card);border-color:var(--color-border)}
+html[data-theme="dark"] .coverage-item{background:#1f2a22}
+html[data-theme="dark"] .stop-card,html[data-theme="dark"] .map-card,html[data-theme="dark"] .discovery-card{background:var(--color-card);border-color:var(--color-border);color:var(--color-text)}
+html[data-theme="dark"] .reason{background:#243128}
+html[data-theme="dark"] .discovery-card{background:#262016}
+html[data-theme="dark"] .replace-label select{background:var(--color-input-bg);border-color:var(--color-border);color:var(--color-text)}
+html[data-theme="dark"] .opt-card.selected{background:var(--color-opt-selected-bg)}
+html[data-theme="dark"] .answer-correct:disabled{background:#1c3324;color:#bfe3c3;border-color:#3f7a4d}
+html[data-theme="dark"] .answer-wrong:disabled{background:#3a2420;color:#f0b9ab;border-color:#9c5440}
+html[data-theme="dark"] #storageNotice{background:#3a3214;color:#f0dfa0}
+html[data-theme="dark"] .plan-sources{border-color:var(--color-border)}
+html[data-theme="dark"] .source-link{color:var(--color-accent-light)}
+html[data-theme="dark"] .map-key{color:var(--color-muted)}
+html[data-theme="dark"] .transfer{color:var(--color-muted)}
